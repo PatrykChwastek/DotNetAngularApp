@@ -1,0 +1,103 @@
+<style>
+    .thTab {
+        text-align: center;
+    }
+
+
+    td {
+        text-align: center;
+    }
+
+    .marg6{
+        margin: 6px;
+    }
+</style>
+<div class="row marg6">
+    <div class="col-md-5">
+            <mat-card>
+                    <h3 class="display-4" text-center>Edit</h3>
+                    <hr>
+                        <form [formGroup]="editForm"  (ngSubmit)="submitUser()">
+                            <input type="hidden" formControlName="userID" >
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text bg-white">
+                                            <i class="fa fa-user-circle"></i>
+                                        </div>
+                                    </div>
+                                    <input formControlName="userName" class="form-control"
+                                        placeholder="Username" required  minlength="4">
+                                </div>
+                            </div>
+                
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text bg-white">
+                                            <i class="fa fa-key"></i>
+                                        </div>
+                                    </div>
+                                    <input type="password" formControlName="userPass"
+                                        class="form-control" placeholder="Password" required minlength="4">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text bg-white">
+                                            @
+                                        </div>
+                                    </div>
+                                    <input formControlName="email" class="form-control"
+                                        placeholder="Email" required  minlength="4">
+                                </div>
+                            </div>
+                
+                            <div class="form-grup">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Edit</button>
+                            </div>
+                        </form>
+                </mat-card>  
+    </div>
+    <div class="col-md-7">
+        <mat-card>
+            <table style="width: 100%" mat-table [dataSource]="users">
+
+                <ng-container matColumnDef="userID">
+                    <th mat-header-cell *matHeaderCellDef class="thTab"> ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.userID}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="userName">
+                    <th mat-header-cell *matHeaderCellDef class="thTab">Username</th>
+                    <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef class="thTab">Email</th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Actions">
+                    <th mat-header-cell *matHeaderCellDef class="thTab">Actions</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button style="margin-right: 4px" mat-mini-fab color="primary"
+                        (click)="editUser(element.userID)" >
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button mat-mini-fab color="warn" 
+                            (click)="deleteUser(element.userID)" >
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </mat-card>
+        <app-pagination [pager]="paginationData" [getUrl]="url"></app-pagination>          
+    </div>
+</div>

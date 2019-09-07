@@ -1,0 +1,24 @@
+.storyBox{
+    margin-bottom: 5px;
+    padding-left: 20px;
+}
+.storyBox:hover{
+    background-color: #d8d8d8;
+}
+.storyBox:active{
+    background-color: #afafaf;
+    transform: translateY(4px);
+}
+p{
+    margin-right: 3px;
+    margin-left: 15px;
+}
+
+.marginAuto{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.searchBox{
+    margin-bottom: 10px;
+}

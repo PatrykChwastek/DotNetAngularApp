@@ -1,0 +1,112 @@
+<mat-card *ngIf="pager.totalPages > 1">          
+  <ul class="pagination flex-wrap">
+      <li *ngIf="pager">
+        <button mat-raised-button color="primary" class="page-item page-link " 
+         [disabled]="pager.page === 1" 
+         (click)="setPage(1)"><<
+        </button>
+      </li>
+      <li>
+        <button mat-raised-button color="primary"
+         class="page-item page-link" 
+         [disabled]="pager.page == 1"(click)="setPage(pager.page - 1)"><
+        </button>
+      </li>
+
+      <ng-container *ngIf="pager.totalPages <= 8">
+        <li *ngFor="let page of counter(pager.totalPages); let i = index" >                   
+          <button mat-mini-fab color="primary" type="button"  
+          [disabled]="pager.page === i+1" class="page-item page-link "  
+          (click)="setPage(i+1)">{{i+1}}
+          </button>
+        </li>
+      </ng-container>
+
+    <ng-container *ngIf="pager.totalPages > 8">
+      <ng-container *ngIf=" 
+          pager.page===1 || pager.page===2||pager.page===3&&
+          pager.page!==pager.totalPages && pager.page!==pager.totalPages-1&&
+          pager.page!==pager.totalPages-2&&pager.page!==pager.totalPages-3"
+      >
+        <li *ngFor="let page of counter(7); let i = index" >                   
+          <button mat-mini-fab color="primary" type="button"  
+          [disabled]="pager.page === i+1" class="page-item page-link "  
+          (click)="setPage(i+1)">{{i+1}}
+          </button>
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf=" 
+          pager.page===pager.totalPages || pager.page===pager.totalPages-1||
+          pager.page===pager.totalPages-2||pager.page===pager.totalPages-3"
+      >
+        <li *ngFor="let page of counter(7); let i = index" >                   
+          <button mat-mini-fab color="primary" type="button"  
+          [disabled]="pager.page === pager.totalPages-7+i+1" class="page-item page-link "  
+          (click)="setPage(pager.totalPages-7+i+1)">{{pager.totalPages-7+i+1}}
+          </button>
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf=" 
+          pager.page!==1 && pager.page!==2 && pager.page!==3 &&
+          pager.page!==pager.totalPages && pager.page!==pager.totalPages-1&&
+          pager.page!==pager.totalPages-2&&pager.page!==pager.totalPages-3">
+          <li>                   
+            <button mat-mini-fab color="primary" type="button"  
+            class="page-item page-link "  
+            (click)="setPage(pager.page-3)">{{pager.page-3}}
+            </button>
+          </li>
+          <li>                   
+              <button mat-mini-fab color="primary" type="button"  
+              class="page-item page-link "  
+              (click)="setPage(pager.page-2)">{{pager.page-2}}
+              </button>
+            </li>
+            <li>                   
+                <button mat-mini-fab color="primary" type="button"  
+                class="page-item page-link "  
+                (click)="setPage(pager.page-1)">{{pager.page-1}}
+                </button>
+              </li>
+              <li>                   
+                  <button disabled mat-mini-fab color="primary" type="button"  
+                  class="page-item page-link"
+                  >{{pager.page}}
+                  </button>
+                </li>
+                <li>                   
+                    <button mat-mini-fab color="primary" type="button"  
+                    class="page-item page-link "  
+                    (click)="setPage(pager.page+1)">{{pager.page+1}}
+                    </button>
+                  </li>
+                  <li>                   
+                      <button mat-mini-fab color="primary" type="button"  
+                      class="page-item page-link "  
+                      (click)="setPage(pager.page+2)">{{pager.page+2}}
+                      </button>
+                    </li>
+                    <li>                   
+                        <button mat-mini-fab color="primary" type="button"  
+                        class="page-item page-link "  
+                        (click)="setPage(pager.page+3)">{{pager.page+3}}
+                        </button>
+                      </li>
+        </ng-container>
+      </ng-container>
+      <li class="page-item ">
+        <button mat-raised-button color="primary" class="page-link  " 
+         [disabled]="pager.page === pager.totalPages"
+         (click)="setPage(pager.page + 1)">>
+        </button>
+      </li>
+      <li>
+        <button mat-raised-button color="primary" class="page-item page-link" 
+         [disabled]="pager.page === pager.totalPages" 
+         (click)="setPage(pager.totalPages)">>>
+        </button>
+      </li>
+    </ul>      
+</mat-card>

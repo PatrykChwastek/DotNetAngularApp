@@ -1,0 +1,23 @@
+<div class="conteiner">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{story.storyTitle}}</mat-card-title>
+            <mat-card-subtitle>By: {{author}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                {{story.storyContent}}
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <hr>
+            <div class="categoriesBox">
+                <mat-chip-list>Categories:
+                        <mat-chip color="primary" *ngFor="let cat of story.categories">
+                            {{cat}}
+                        </mat-chip>
+                </mat-chip-list>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</div>

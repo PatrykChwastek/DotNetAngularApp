@@ -1,0 +1,57 @@
+<mat-card class="searchBox">
+
+    <form [formGroup]="searchForm"  (ngSubmit)="search()">
+        <div style="display: inline-block"  class="col-md-2">
+            <h5>Search Story: </h5>
+        </div>
+        <mat-form-field class="col-md-4">
+            <input matInput formControlName="storyTitle" placeholder="Story Title">
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <mat-label>Select Category</mat-label>
+            <select matNativeControl formControlName="storyCategory">  
+                <option value="" disabled selected></option>           
+                <option ngValue=""> none</option>           
+                <option *ngFor="let cat of allCategories" 
+                    value="{{cat}}">
+                    {{cat}}
+                </option>
+            </select>
+        </mat-form-field>
+        <div style="display: inline-block" class="col-md-2">
+            <button mat-raised-button color="primary" type="submit">
+                Search
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </div>
+    </form>
+</mat-card>
+<span [ngSwitch]="allStories.length<=0">
+    <div *ngSwitchCase="false">
+<mat-card class="storyBox"
+    *ngFor="let story of allStories" [routerLink]="['/story_view', story.storyID]">
+    
+    <div class="row col-md-12">
+        <h4>{{story.storyTitle}}</h4>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-3 marginAuto">
+          Author: {{story.author}}
+        </div>
+        <div class="row col-md-9 ">
+           <p class="marginAuto">Categories: </p>
+            <mat-chip-list > 
+                    <mat-chip color="primary" *ngFor="let cat of story.categories">
+                        {{cat}}
+                    </mat-chip>
+            </mat-chip-list>
+        </div>
+    </div>
+</mat-card>
+</div>
+<mat-card   *ngSwitchCase="true">
+    <h3>Stories not found...</h3>
+</mat-card>
+</span>
+<app-pagination [pager]="paginationData" [getUrl]="url"></app-pagination>

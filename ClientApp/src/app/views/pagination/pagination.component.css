@@ -1,0 +1,16 @@
+button {
+    margin: 1px;
+    font-size: 14px;
+    width: 40px!important;
+    min-width: unset!important;
+    padding: 1px;
+  }
+
+.mat-card {
+
+margin-top: 10px;
+margin-bottom: 15px;
+padding: 3px !important;
+display: inline-block;
+
+}

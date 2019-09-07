@@ -1,0 +1,23 @@
+p{
+    text-align: justify;
+    margin-bottom: 5px;
+}
+
+.homeBox{
+    width: 80%; 
+    margin: auto;
+    margin-bottom: 15px
+}
+
+.mList{
+   margin-left: 15px;
+}
+
+.techLogo{
+    width: 65px;
+}
+
+.techBox{
+    margin-bottom: 15px; 
+    background-color: rgb(226, 226, 226);
+}

@@ -1,0 +1,16 @@
+.marginAuto{
+    margin: auto;
+}
+
+
+::ng-deep .green-sb{
+    color: black;
+    background-color:  rgb(15, 126, 15);
+    border: 2px;
+}
+
+::ng-deep .red-sb{
+    color: rgb(255, 255, 255);
+    background-color:  rgb(145, 36, 17);
+    border: 2px;
+}
