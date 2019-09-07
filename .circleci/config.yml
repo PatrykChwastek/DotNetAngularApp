@@ -11,7 +11,8 @@ jobs:
          docker build -t aspnetapp -f Dockerfile .
 
      # deploy the image
-     - run: |         
+     - run: |
+     SHELL ["/bin/bash", "-o", "pipefail", "-c"]         
          docker login --username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
          docker tag aspnetapp registry.heroku.com/$HEROKU_APP_NAME/web
          docker push registry.heroku.com/$HEROKU_APP_NAME/web                
