@@ -2,7 +2,7 @@ FROM microsoft/dotnet:2.2-sdk-alpine AS builder
 WORKDIR /source
 COPY . .
 RUN dotnet restore
-RUN dotnet publish -c Release -r linux-musl-x64 -o /app
+RUN dotnet publish -c Development -r linux-musl-x64 -o /app
 
 FROM node as nodebuilder
 
