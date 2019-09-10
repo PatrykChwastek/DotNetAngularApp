@@ -34,7 +34,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rootURL", function() { return rootURL; });
 
-var rootURL = 'https://dot-net-angular-app.herokuapp.com/api/';
+var rootURL = 'https://dot-net-core-angular-app.herokuapp.com/api/';
 
 
 /***/ }),

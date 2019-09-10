@@ -1,16 +1,20 @@
-FROM microsoft/dotnet:2.2-sdk AS build-env
+FROM node:10.13.0-alpine as node
 WORKDIR /app
+COPY public ./public
+COPY src/index.js ./src/index.js
+COPY package*.json ./
+RUN npm install --progress=true --loglevel=silent
+COPY src/client ./src/client/
+RUN npm run build
 
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
+FROM microsoft/dotnet:2.2-sdk-alpine AS builder
+WORKDIR /source
+COPY . .
 RUN dotnet restore
+RUN dotnet publish -c Release -r linux-musl-x64 -o /app
 
-# Copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o out
-
-# Build runtime image
-FROM microsoft/dotnet:2.2-aspnetcore-runtime
+FROM microsoft/dotnet:2.2-aspnetcore-runtime-alpine
 WORKDIR /app
-COPY --from=build-env /app/out .
-CMD dotnet AspNetCoreHerokuDocker.dll
+COPY --from=builder /app .
+COPY --from=node /app/build ./wwwroot
+ENTRYPOINT ["./DotNetCoreAngularApp"]
