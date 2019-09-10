@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   loginUser(){
     let loginData = JSON.stringify(this.loginForm.value);
-    this.http.post(myGlobals.rootURL+"api/auth/login", loginData, {
+    this.http.post(myGlobals.rootURL+"auth/login", loginData, {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })

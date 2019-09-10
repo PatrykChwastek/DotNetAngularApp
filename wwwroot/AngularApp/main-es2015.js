@@ -1079,7 +1079,7 @@ let LoginComponent = class LoginComponent {
     }
     loginUser() {
         let loginData = JSON.stringify(this.loginForm.value);
-        this.http.post(globals__WEBPACK_IMPORTED_MODULE_6__["rootURL"] + "api/auth/login", loginData, {
+        this.http.post(globals__WEBPACK_IMPORTED_MODULE_6__["rootURL"] + "auth/login", loginData, {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
                 "Content-Type": "application/json"
             })
