@@ -40,24 +40,6 @@ namespace WebApplication.Controllers
             return Created("stories", new { page, size, totalPages, items });
         }
 
-        [HttpGet]
-        [ActionName("user")]
-        public async Task<IActionResult> GetAllByUserAsync(int user,int page, int size)
-        {
-            if (page <= 0)
-            {
-                page = 1;
-            }
-
-            var query = _context.Story;
-            var count = query.Where(i => i.UserID == user).Count();
-            var totalPages = (int)Math.Ceiling(count / (float)size);
-
-            var items = await query.Where(i=>i.UserID==user).OrderBy(x => x.StoryID).Skip((page - 1) * size).Take(size).ToArrayAsync();
-
-            return Created("stories", new { page, size, totalPages, items });
-        }
-
         //GET api/story/category?cat  = drama & page = 1 & size = 3
         [HttpGet]
         [ActionName("category")]

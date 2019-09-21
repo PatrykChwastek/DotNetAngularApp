@@ -90,7 +90,7 @@ module.exports = "<mat-card>\n    <mat-card-header>\n        <mat-card-title>Cre
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"searchBox\">\n\n    <form [formGroup]=\"searchForm\"  (ngSubmit)=\"search()\">\n        <div style=\"display: inline-block\"  class=\"col-md-2\">\n            <h5>Search Story: </h5>\n        </div>\n        <mat-form-field class=\"col-md-4\">\n            <input matInput formControlName=\"storyTitle\" placeholder=\"Story Title\">\n        </mat-form-field>\n        <mat-form-field class=\"col-md-4\">\n            <mat-label>Select Category</mat-label>\n            <select matNativeControl formControlName=\"storyCategory\">  \n                <option value=\"\" disabled selected></option>           \n                <option ngValue=\"\"> none</option>           \n                <option *ngFor=\"let cat of allCategories\" \n                    value=\"{{cat}}\">\n                    {{cat}}\n                </option>\n            </select>\n        </mat-form-field>\n        <div style=\"display: inline-block\" class=\"col-md-2\">\n            <button mat-raised-button color=\"primary\" type=\"submit\">\n                Search\n                <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\n            </button>\n        </div>\n    </form>\n</mat-card>\n<span [ngSwitch]=\"allStories.length<=0\">\n    <div *ngSwitchCase=\"false\">\n<mat-card class=\"storyBox\"\n    *ngFor=\"let story of allStories\" [routerLink]=\"['/story_view', story.storyID]\">\n    \n    <div class=\"row col-md-12\">\n        <h4>{{story.storyTitle}}</h4>\n    </div>\n    <hr>\n    <div class=\"row\">\n        <div class=\"col-md-3 marginAuto\">\n          Author: {{story.author}}\n        </div>\n        <div class=\"row col-md-9 \">\n           <p class=\"marginAuto\">Categories: </p>\n            <mat-chip-list > \n                    <mat-chip color=\"primary\" *ngFor=\"let cat of story.categories\">\n                        {{cat}}\n                    </mat-chip>\n            </mat-chip-list>\n        </div>\n    </div>\n</mat-card>\n</div>\n<mat-card   *ngSwitchCase=\"true\">\n    <h3>Stories not found...</h3>\n</mat-card>\n</span>\n<app-pagination [pager]=\"paginationData\" [getUrl]=\"url\"></app-pagination>"
+module.exports = "<mat-card class=\"searchBox\">\n\n    <form [formGroup]=\"searchForm\"  (ngSubmit)=\"search()\">\n        <div style=\"display: inline-block\"  class=\"col-md-2\">\n            <h5>Search Story: </h5>\n        </div>\n        <mat-form-field class=\"col-md-4\">\n            <input matInput formControlName=\"storyTitle\" placeholder=\"Story Title\">\n        </mat-form-field>\n        <mat-form-field class=\"col-md-4\">\n            <mat-label>Select Category</mat-label>\n            <select matNativeControl formControlName=\"storyCategory\">  \n                <option value=\"\" disabled selected></option>           \n                <option ngValue=\"\"> none</option>           \n                <option *ngFor=\"let cat of allCategories\" \n                    value=\"{{cat}}\">\n                    {{cat}}\n                </option>\n            </select>\n        </mat-form-field>\n        <div style=\"display: inline-block\" class=\"col-md-2\">\n            <button mat-raised-button color=\"primary\" type=\"submit\">\n                Search\n                <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\n            </button>\n        </div>\n    </form>\n</mat-card>\n<span [ngSwitch]=\"stories.length<=0\">\n    <div *ngSwitchCase=\"false\">\n<mat-card class=\"storyBox\"\n    *ngFor=\"let story of stories\" [routerLink]=\"['/story_view', story.storyID]\">\n    \n    <div class=\"row col-md-12\">\n        <h4>{{story.storyTitle}}</h4>\n    </div>\n    <hr>\n    <div class=\"row\">\n        <div class=\"col-md-3 marginAuto\">\n          Author: {{story.user}}\n        </div>\n        <div class=\"row col-md-9 \">\n           <p class=\"marginAuto\">Categories: </p>\n            <mat-chip-list > \n                    <mat-chip color=\"primary\" *ngFor=\"let cat of story.categories\">\n                        {{cat}}\n                    </mat-chip>\n            </mat-chip-list>\n        </div>\n    </div>\n</mat-card>\n</div>\n<mat-card   *ngSwitchCase=\"true\">\n    <h3>{{message}}</h3>\n</mat-card>\n</span>\n<app-pagination [pager]=\"paginationData\" [getUrl]=\"url\"></app-pagination>"
 
 /***/ }),
 
@@ -101,7 +101,7 @@ module.exports = "<mat-card class=\"searchBox\">\n\n    <form [formGroup]=\"sear
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"conteiner\">\n    <mat-card>\n        <mat-card-header>\n            <mat-card-title>{{story.storyTitle}}</mat-card-title>\n            <mat-card-subtitle>By: {{author}}</mat-card-subtitle>\n        </mat-card-header>\n        <mat-card-content>\n            <p>\n                {{story.storyContent}}\n            </p>\n        </mat-card-content>\n        <mat-card-actions>\n            <hr>\n            <div class=\"categoriesBox\">\n                <mat-chip-list>Categories:\n                        <mat-chip color=\"primary\" *ngFor=\"let cat of story.categories\">\n                            {{cat}}\n                        </mat-chip>\n                </mat-chip-list>\n            </div>\n        </mat-card-actions>\n    </mat-card>\n</div>\n"
+module.exports = "<div class=\"conteiner\">\n    <mat-card>\n        <mat-card-header>\n            <mat-card-title>{{story.storyTitle}}</mat-card-title>\n            <mat-card-subtitle>By: {{story.user}}</mat-card-subtitle>\n        </mat-card-header>\n        <mat-card-content>\n            <p>\n                {{story.storyContent}}\n            </p>\n        </mat-card-content>\n        <mat-card-actions>\n            <hr>\n            <div class=\"categoriesBox\">\n                <mat-chip-list>Categories:\n                        <mat-chip color=\"primary\" *ngFor=\"let cat of story.categories\">\n                            {{cat}}\n                        </mat-chip>\n                </mat-chip-list>\n            </div>\n        </mat-card-actions>\n    </mat-card>\n</div>\n"
 
 /***/ }),
 
@@ -768,6 +768,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_shared_services_story_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/shared/services/story.service */ "./src/app/shared/services/story.service.ts");
 /* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/index.js");
 /* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/snack-bar */ "./node_modules/@angular/material/esm5/snack-bar.es5.js");
+/* harmony import */ var src_app_shared_services_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/shared/services/user.service */ "./src/app/shared/services/user.service.ts");
+
 
 
 
@@ -775,8 +777,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var CreateStoryComponent = /** @class */ (function () {
-    function CreateStoryComponent(storyService, _snackBar) {
+    function CreateStoryComponent(storyService, userService, _snackBar) {
         this.storyService = storyService;
+        this.userService = userService;
         this._snackBar = _snackBar;
         this.jwtHelper = new _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_4__["JwtHelperService"]();
         this.categories = [];
@@ -801,20 +804,22 @@ var CreateStoryComponent = /** @class */ (function () {
         this.story = this.storyForm.value;
         this.story.categories = this.categories;
         this.story.storyID = 0;
-        this.story.userID = this.jwtHelper.decodeToken(token).userID;
-        this.storyService.postStory(this.story)
-            .toPromise().then(function (res) {
-            _this.storyForm.reset();
-            _this.categories = [];
-            _this._snackBar.open("Story Created...", null, {
-                duration: 3000,
-                panelClass: ['green-sb']
-            });
-        }, function (err) {
-            console.log(err);
-            _this._snackBar.open("Error", null, {
-                duration: 3000,
-                panelClass: ['red-sb']
+        this.userService.getUserById(this.jwtHelper.decodeToken(token).userID).subscribe(function (res) {
+            _this.story.user = res.userName;
+            _this.storyService.postStory(_this.story)
+                .toPromise().then(function (res) {
+                _this.storyForm.reset();
+                _this.categories = [];
+                _this._snackBar.open("Story Created...", null, {
+                    duration: 3000,
+                    panelClass: ['green-sb']
+                });
+            }, function (err) {
+                console.log(err);
+                _this._snackBar.open("Error", null, {
+                    duration: 3000,
+                    panelClass: ['red-sb']
+                });
             });
         });
     };
@@ -829,6 +834,7 @@ var CreateStoryComponent = /** @class */ (function () {
     };
     CreateStoryComponent.ctorParameters = function () { return [
         { type: src_app_shared_services_story_service__WEBPACK_IMPORTED_MODULE_3__["StoryService"] },
+        { type: src_app_shared_services_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"] },
         { type: _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"] }
     ]; };
     CreateStoryComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -837,7 +843,9 @@ var CreateStoryComponent = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./create-story.component.html */ "./node_modules/raw-loader/index.js!./src/app/views/stories/create-story/create-story.component.html"),
             styles: [__webpack_require__(/*! ./create-story.component.css */ "./src/app/views/stories/create-story/create-story.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_shared_services_story_service__WEBPACK_IMPORTED_MODULE_3__["StoryService"], _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_shared_services_story_service__WEBPACK_IMPORTED_MODULE_3__["StoryService"],
+            src_app_shared_services_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"],
+            _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"]])
     ], CreateStoryComponent);
     return CreateStoryComponent;
 }());
@@ -889,8 +897,8 @@ var StoriesComponent = /** @class */ (function () {
         this.paginationData = new src_app_shared_models_pagination_detail_model__WEBPACK_IMPORTED_MODULE_2__["PaginationDetail"];
         this.url = "story/all?";
         this.stories = [];
-        this.allStories = [];
         this.allCategories = [];
+        this.message = "Loading...";
     }
     StoriesComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -938,20 +946,11 @@ var StoriesComponent = /** @class */ (function () {
             this.subscription = this.pgService.invokePage.subscribe(function (data) {
                 _this.stories = data.items;
                 _this.paginationData = data;
-                _this.allStories = [];
-                var _loop_1 = function (index) {
-                    _this.userService.getUserById(_this.stories[index].userID).subscribe(function (user) {
-                        _this.allStories.push({
-                            storyID: _this.stories[index].storyID,
-                            author: user.userName,
-                            storyTitle: _this.stories[index].storyTitle,
-                            storyContent: _this.stories[index].storyContent,
-                            categories: _this.stories[index].categories,
-                        });
-                    });
-                };
-                for (var index = 0; index < _this.stories.length; index++) {
-                    _loop_1(index);
+                if (_this.stories.length <= 0) {
+                    _this.message = "Stories not found...";
+                }
+                else {
+                    _this.message = "Loading...";
                 }
             });
         }
@@ -959,20 +958,11 @@ var StoriesComponent = /** @class */ (function () {
             this.pgService.getPage(1, this.url).subscribe(function (res) {
                 _this.paginationData = res;
                 _this.stories = res.items;
-                _this.allStories = [];
-                var _loop_2 = function (index) {
-                    _this.userService.getUserById(_this.stories[index].userID).subscribe(function (user) {
-                        _this.allStories.push({
-                            storyID: _this.stories[index].storyID,
-                            author: user.userName,
-                            storyTitle: _this.stories[index].storyTitle,
-                            storyContent: _this.stories[index].storyContent,
-                            categories: _this.stories[index].categories,
-                        });
-                    });
-                };
-                for (var index = 0; index < _this.stories.length; index++) {
-                    _loop_2(index);
+                if (_this.stories.length <= 0) {
+                    _this.message = "Stories not found...";
+                }
+                else {
+                    _this.message = "Loading...";
                 }
             });
         }
@@ -1038,15 +1028,11 @@ var StoryViewComponent = /** @class */ (function () {
         this.userService = userService;
         this.storyService = storyService;
         this.story = new src_app_shared_models_story_model__WEBPACK_IMPORTED_MODULE_3__["Story"];
-        this.author = "";
     }
     StoryViewComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.storyService.getStoryByID(this.route.snapshot.params['id']).subscribe(function (story) {
             _this.story = story;
-            _this.userService.getUserById(story.userID).subscribe(function (res) {
-                _this.author = res.userName;
-            });
         });
     };
     StoryViewComponent.ctorParameters = function () { return [

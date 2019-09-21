@@ -9,18 +9,14 @@ namespace WebApplication.Models
 {
     public class Story
     {
-        private readonly char delimiter = ',';
-        private string _categories;
-        public Story()
-        {
-        }
+        public Story(){}
 
-        public Story(int storyID, string storyTitle, string storyContent, int userID, string[] storyCategory)
+        public Story(int storyID, string storyTitle, string storyContent, string user, string[] storyCategory)
         {
             StoryID = storyID;
             StoryTitle = storyTitle;
             StoryContent = storyContent;
-            UserID = userID;
+            User = user;
             Categories = storyCategory;
         }
 
@@ -33,8 +29,8 @@ namespace WebApplication.Models
         [Column(TypeName = "text")]
         public string StoryContent { get; set; }
         [Required]
-        [Column(TypeName = "int")]
-        public int UserID { get; set; }
+        [Column(TypeName = "text")]
+        public string User { get; set; }
         [Required]
         [Column(TypeName = "text[]")]
         public string[] Categories { get; set; }

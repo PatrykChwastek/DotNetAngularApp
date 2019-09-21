@@ -18,10 +18,10 @@ export class StoriesComponent implements OnInit {
   paginationData: PaginationDetail= new PaginationDetail;
   url:string = "story/all?";
   stories:Story[]=[];
-  allStories:any[]=[]
   allCategories: string[]=[];
   subscription:Subscription;
   searchForm:FormGroup;
+  message:string="Loading...";
 
   constructor( 
     private pgService: PaginationService,
@@ -83,37 +83,21 @@ export class StoriesComponent implements OnInit {
     if (this.paginationData.page===undefined) {   
       this.subscription= this.pgService.invokePage.subscribe((data:any) =>{
         this.stories=data.items; this.paginationData= data;        
-        this.allStories=[];    
-          for (let index = 0; index < this.stories.length; index++) {
-            this.userService.getUserById(this.stories[index].userID).subscribe((user:any)=>{
-              this.allStories.push(
-                {
-                  storyID:this.stories[index].storyID,
-                  author:user.userName,
-                  storyTitle:this.stories[index].storyTitle,
-                  storyContent:this.stories[index].storyContent, 
-                  categories:this.stories[index].categories, 
-                })         
-            })
-          }
-      })
-    } else {
-      this.pgService.getPage(1,this.url).subscribe(res=>{
-        this.paginationData=res; this.stories = res.items;
-        this.allStories=[];          
-        for (let index = 0; index < this.stories.length; index++) {
-          this.userService.getUserById(this.stories[index].userID).subscribe((user:any)=>{
-            this.allStories.push(
-              {
-                storyID:this.stories[index].storyID,
-                author:user.userName,
-                storyTitle:this.stories[index].storyTitle,
-                storyContent:this.stories[index].storyContent, 
-                categories:this.stories[index].categories, 
-              })         
-          })
+        if(this.stories.length <=0){
+          this.message="Stories not found...";
+        }else{
+          this.message="Loading...";
         }
       })
+    }else{
+      this.pgService.getPage(1,this.url).subscribe(res=>{
+        this.paginationData=res; this.stories = res.items;
+        if(this.stories.length <=0){
+          this.message="Stories not found...";
+        }else{
+          this.message="Loading...";
+        }
+      });
     }
   }
 }

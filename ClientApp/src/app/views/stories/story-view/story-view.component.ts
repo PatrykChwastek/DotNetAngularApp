@@ -13,7 +13,6 @@ import { StoryService } from 'src/app/shared/services/story.service';
 export class StoryViewComponent implements OnInit {
 
   story:Story=new Story;
-  author:string="";
 
   constructor(
     private route:ActivatedRoute,
@@ -23,9 +22,6 @@ export class StoryViewComponent implements OnInit {
   ngOnInit() {
     this.storyService.getStoryByID(this.route.snapshot.params['id']).subscribe((story:Story)=>{
       this.story=story;
-      this.userService.getUserById(story.userID).subscribe((res:any)=>{
-        this.author=res.userName;
-      })
     });
   }
 }

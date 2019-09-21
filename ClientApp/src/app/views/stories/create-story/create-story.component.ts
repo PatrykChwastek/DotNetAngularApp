@@ -5,6 +5,8 @@ import { Story } from 'src/app/shared/models/story.model';
 import { StoryService } from 'src/app/shared/services/story.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from 'src/app/shared/services/user.service';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-create-story',
@@ -18,7 +20,10 @@ export class CreateStoryComponent implements OnInit {
   allCategories:string[]=[]
   story:Story;
 
-  constructor(private storyService: StoryService,private _snackBar: MatSnackBar) { }
+  constructor(
+    private storyService: StoryService,
+    private userService:UserService,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.storyForm=new FormGroup({
@@ -40,7 +45,9 @@ export class CreateStoryComponent implements OnInit {
     this.story.categories=this.categories;
     this.story.storyID=0;
 
-    this.story.userID= this.jwtHelper.decodeToken(token).userID;
+    this.userService.getUserById(this.jwtHelper.decodeToken(token).userID).subscribe((res:User)=>
+    {
+    this.story.user = res.userName;
 
     this.storyService.postStory(this.story)
       .toPromise().then(res=>{
@@ -56,6 +63,7 @@ export class CreateStoryComponent implements OnInit {
           panelClass: ['red-sb']
         });
       })
+    });
   }
 
   addCategory(cat:string){

@@ -2,6 +2,6 @@ export class Story {
     storyID:number;
     storyTitle:string;
     storyContent:string;
-    userID:number;
+    user:string;
     categories:string[];
 }

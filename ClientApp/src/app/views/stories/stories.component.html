@@ -26,10 +26,10 @@
         </div>
     </form>
 </mat-card>
-<span [ngSwitch]="allStories.length<=0">
+<span [ngSwitch]="stories.length<=0">
     <div *ngSwitchCase="false">
 <mat-card class="storyBox"
-    *ngFor="let story of allStories" [routerLink]="['/story_view', story.storyID]">
+    *ngFor="let story of stories" [routerLink]="['/story_view', story.storyID]">
     
     <div class="row col-md-12">
         <h4>{{story.storyTitle}}</h4>
@@ -37,7 +37,7 @@
     <hr>
     <div class="row">
         <div class="col-md-3 marginAuto">
-          Author: {{story.author}}
+          Author: {{story.user}}
         </div>
         <div class="row col-md-9 ">
            <p class="marginAuto">Categories: </p>
@@ -51,7 +51,7 @@
 </mat-card>
 </div>
 <mat-card   *ngSwitchCase="true">
-    <h3>Stories not found...</h3>
+    <h3>{{message}}</h3>
 </mat-card>
 </span>
 <app-pagination [pager]="paginationData" [getUrl]="url"></app-pagination>

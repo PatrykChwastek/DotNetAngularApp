@@ -43,7 +43,7 @@ namespace WebApplication.Controllers
                 var tokeOptions = new JwtSecurityToken(
 
                     claims: new List<Claim>() {
-                       
+                       new Claim("userID", user.First().UserID.ToString())
                     },
                     expires: DateTime.Now.AddMinutes(5),
                     signingCredentials: signinCredentials
